@@ -4,7 +4,6 @@ package object Huffman {
   case class Hoja (car: Char, peso: Int) extends ArbolH
 
   //Parte 1: Funciones esenciales y sencillas
-
   def peso(arbol: ArbolH): Int = arbol match {
     case Nodo(izq, der, cars, peso) => peso
     case Hoja(car, peso) => peso
@@ -15,13 +14,17 @@ package object Huffman {
     case Hoja(car, peso) => car :: Nil
   }
 
-  def hacerNodoArbolH(izq: ArbolH, der: ArbolH):ArbolH =
-    Nodo(izq, der, cars(izq) ::: cars(der), peso(izq) + peso(der)):ArbolH {
+  def hacerNodoArbolH(izq: ArbolH, der: ArbolH):ArbolH = {
+    Nodo(izq, der, cars(izq) ::: cars(der), peso(izq) + peso(der)):ArbolH
   }
 
   // Parte 2: Construyendo árboles de Huffman
+  def cadenaALista(cad: String): List [Char] = {
+    val cadAux = cad.split("\\s+")    //Ignora los espacios en blanco y devuelve Array de String
+    cadAux.flatMap(_.toSeq).toList           //Convierte cada String en Seq[Char],
+                                             //aplana las secuencias en una Seq[Char] y la convierte en una List[Char]
 
-  def cadenaALista(cad: String): List [Char] = cad.toList
+  }
 
   def ocurrencias(cars: List[Char]): List[(Char, Int)] = cars match {
     case Nil => Nil
@@ -58,8 +61,15 @@ package object Huffman {
   }
 
   def hastaQue(cond: List[ArbolH] => Boolean, mezclar: List[ArbolH] => List[ArbolH])
-              (listaOrdenadaArboles: List[ArbolH]): List[ArbolH] = listaOrdenadaArboles match{
-    case List(x) => List(x)
-    case x :: y :: xs => mezclar(List(x,y))
+              (listaOrdenadaArboles: List[ArbolH]): List[ArbolH] = {
+    if (cond(listaOrdenadaArboles)) listaOrdenadaArboles
+    else {
+      val listaAux = mezclar(listaOrdenadaArboles)
+      hastaQue(cond, mezclar)(listaAux)
+    }
+
+  }
+  def crearArbolDeHuffman(cars: List[Char]): ArbolH = {
+    hastaQue(listaUnitaria,combinar)(listaDeHojasOrdenadas(ocurrencias(cars))).head
   }
 }
