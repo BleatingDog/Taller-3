@@ -38,7 +38,7 @@ package object Huffman {
       case Nil => l2
       case m::ms => l2 match {
         case Nil => l1
-        case n::ns => if (m.peso < n.peso) m::merge(ms,l2) else n::merge(l1,ns)
+        case n::ns => if (m.peso <= n.peso) m::merge(ms,l2) else n::merge(l1,ns)
       }
     }
     val n = frecs.length/2
@@ -62,14 +62,16 @@ package object Huffman {
 
   def hastaQue(cond: List[ArbolH] => Boolean, mezclar: List[ArbolH] => List[ArbolH])
               (listaOrdenadaArboles: List[ArbolH]): List[ArbolH] = {
-    if (cond(listaOrdenadaArboles)) listaOrdenadaArboles
+    if (cond(listaOrdenadaArboles) || listaOrdenadaArboles == Nil) listaOrdenadaArboles
     else {
       val listaAux = mezclar(listaOrdenadaArboles)
       hastaQue(cond, mezclar)(listaAux)
     }
-
   }
+
   def crearArbolDeHuffman(cars: List[Char]): ArbolH = {
-    hastaQue(listaUnitaria,combinar)(listaDeHojasOrdenadas(ocurrencias(cars))).head
+    if(cars.isEmpty) throw new UnsupportedOperationException("Lista de caracteres vacía")
+    else
+      hastaQue(listaUnitaria,combinar)(listaDeHojasOrdenadas(ocurrencias(cars))).head
   }
 }
