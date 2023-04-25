@@ -75,6 +75,8 @@ combinar(lu3)  //Resultado esperado: List(Nodo(Nodo(Hoja(a,3),Hoja(b,2),List(a, 
 val c1 = List(Hoja('c', 1), Nodo(Hoja('a', 3), Hoja('b', 2), List('a', 'b'), 5))
 combinar(c1)  //Resultado esperado: List(Hoja(c,1), Nodo(Hoja(a,3),Hoja(b,2),List(a, b),5))
 combinar(lu5)  //Resultado esperado: List(Nodo(Hoja(a,3),Hoja(b,2),List(a, b),5), Hoja(c,1))
+val c2 = List(Hoja('a', 3),Hoja('b', 4),Hoja('c', 5),Hoja('d', 6))
+combinar(c2)
 
 hastaQue(listaUnitaria, combinar)(lu1)  //Resultado esperado: List():List[ArbolH]
 hastaQue(listaUnitaria, combinar)(lu2)  //Resultado esperado: List(Hoja(a,3))
@@ -83,11 +85,14 @@ hastaQue(listaUnitaria, combinar)(listaDeHojasOrdenadas(ocurrencias(o4)))
 hastaQue(listaUnitaria, combinar)(listaDeHojasOrdenadas(ocurrencias(o6)))
 
 
-val lc = cadenaALista("La vida es dura")
-val lc2 = cadenaALista("perro")
-val lc3 = cadenaALista("aaaabbbccde")
-val lc4 = cadenaALista("")
-crearArbolDeHuffman(lc4)
-crearArbolDeHuffman(lc)
+val lc1 = cadenaALista("A")
+val lc2 = cadenaALista("AS")
+val lc3 = cadenaALista("la ola")
+val lc4 = cadenaALista("pera")
+val lc5 = cadenaALista("aaaa bbb cc d")
+crearArbolDeHuffman(lc1) //Resultado esperado: Hoja(A, 1)
 crearArbolDeHuffman(lc2)
 crearArbolDeHuffman(lc3)
+crearArbolDeHuffman(lc4)
+crearArbolDeHuffman(lc5)
+

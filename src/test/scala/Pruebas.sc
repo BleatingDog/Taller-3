@@ -74,7 +74,8 @@ combinar(lu2)  //Resultado esperado: List(Hoja(a,3))
 combinar(lu3)  //Resultado esperado: List(Nodo(Nodo(Hoja(a,3),Hoja(b,2),List(a, b),5),Hoja(c,1),List(a, b, c),6))
 val c1 = List(Hoja('c', 1), Nodo(Hoja('a', 3), Hoja('b', 2), List('a', 'b'), 5))
 combinar(c1)  //Resultado esperado: List(Hoja(c,1), Nodo(Hoja(a,3),Hoja(b,2),List(a, b),5))
-combinar(lu5)  //Resultado esperado: List(Nodo(Hoja(a,3),Hoja(b,2),List(a, b),5), Hoja(c,1))
+val c2 = List(Hoja('a', 3),Hoja('b', 4),Hoja('c', 5),Hoja('d', 6))
+combinar(c2) //Resultado esperado: List(Hoja(c,5), Hoja(d,6), Nodo(Hoja(a,3),Hoja(b,4),List(a, b),7))
 
 hastaQue(listaUnitaria, combinar)(lu1)  //Resultado esperado: List():List[ArbolH]
 hastaQue(listaUnitaria, combinar)(lu2)  //Resultado esperado: List(Hoja(a,3))

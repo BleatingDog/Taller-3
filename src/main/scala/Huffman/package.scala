@@ -1,3 +1,5 @@
+import scala.annotation.tailrec
+
 package object Huffman {
   abstract class ArbolH
   case class Nodo (izq: ArbolH, der: ArbolH, cars: List[Char], peso: Int) extends ArbolH
@@ -5,13 +7,13 @@ package object Huffman {
 
   //Parte 1: Funciones esenciales y sencillas
   def peso(arbol: ArbolH): Int = arbol match {
-    case Nodo(izq, der, cars, peso) => peso
-    case Hoja(car, peso) => peso
+    case Nodo(_, _, _, peso) => peso
+    case Hoja(_, peso) => peso
   }
 
   def cars(arbol: ArbolH): List[Char] = arbol match {
-    case Nodo(izq, der, cars, peso) => cars
-    case Hoja(car, peso) => car :: Nil
+    case Nodo(_, _, cars, _) => cars
+    case Hoja(car, _) => car :: Nil
   }
 
   def hacerNodoArbolH(izq: ArbolH, der: ArbolH):ArbolH = {
@@ -57,9 +59,14 @@ package object Huffman {
   def combinar(arboles: List[ArbolH]): List[ArbolH] = arboles match{
     case Nil => Nil
     case x :: Nil => List(x)
-    case x :: y :: xs => hacerNodoArbolH(x,y) :: xs
+    case x :: y :: xs =>
+      val nuevoArbol = hacerNodoArbolH(x, y)
+      val aux = peso(nuevoArbol)
+      val (menoresAux:List[ArbolH], mayoresAux:List[ArbolH]) = xs.partition(peso(_) <= aux)
+      menoresAux ::: (nuevoArbol :: mayoresAux)
   }
-
+  //hacerNodoArbolH(x, y) :: xs
+  @tailrec
   def hastaQue(cond: List[ArbolH] => Boolean, mezclar: List[ArbolH] => List[ArbolH])
               (listaOrdenadaArboles: List[ArbolH]): List[ArbolH] = {
     if (cond(listaOrdenadaArboles) || listaOrdenadaArboles == Nil) listaOrdenadaArboles
