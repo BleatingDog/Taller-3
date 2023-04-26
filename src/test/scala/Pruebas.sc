@@ -1,5 +1,20 @@
 import Huffman . _
 
+///////////////// Pruebas de PoJohn
+
+val stringDePrueba = "Hola mundo :P"
+val stringHechoLista = cadenaALista(stringDePrueba)
+
+val arbol = crearArbolDeHuffman(stringHechoLista)
+
+val codigo = codificar(arbol)(stringHechoLista)
+val codigo2 = codificarRapido(arbol)(stringHechoLista)
+
+decodificar(arbol, codigo)
+decodificar(arbol, codigo2)
+
+////////////////// Fin pruebas de PoJohn
+
 val a1 = Hoja('a', 1)
 peso(a1) // Resultado esperado: 1
 
@@ -93,4 +108,3 @@ crearArbolDeHuffman(lc2)
 crearArbolDeHuffman(lc3)
 crearArbolDeHuffman(lc4)
 crearArbolDeHuffman(lc5)
-
