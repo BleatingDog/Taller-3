@@ -1,5 +1,20 @@
 import Huffman . _
 
+///////////////// Pruebas de PoJohn
+
+val stringDePrueba = "Hola mundo :P"
+val stringHechoLista = cadenaALista(stringDePrueba)
+
+val arbol = crearArbolDeHuffman(stringHechoLista)
+
+val codigo = codificar(arbol)(stringHechoLista)
+val codigo2 = codificarRapido(arbol)(stringHechoLista)
+
+decodificar(arbol, codigo)
+decodificar(arbol, codigo2)
+
+////////////////// Fin pruebas de PoJohn
+
 val a1 = Hoja('a', 1)
 peso(a1) // Resultado esperado: 1
 
@@ -72,11 +87,12 @@ listaUnitaria(lu5)  //Resultado esperado: false
 combinar(lu1)  //Resultado esperado: List(): List[ArbolH]
 combinar(lu2)  //Resultado esperado: List(Hoja(a,3))
 combinar(lu3)  //Resultado esperado: List(Nodo(Nodo(Hoja(a,3),Hoja(b,2),List(a, b),5),Hoja(c,1),List(a, b, c),6))
+
 val c1 = List(Hoja('c', 1), Nodo(Hoja('a', 3), Hoja('b', 2), List('a', 'b'), 5))
-combinar(c1)  //Resultado esperado: List(Hoja(c,1), Nodo(Hoja(a,3),Hoja(b,2),List(a, b),5))
-combinar(lu5)  //Resultado esperado: List(Nodo(Hoja(a,3),Hoja(b,2),List(a, b),5), Hoja(c,1))
+combinar(c1)  //Resultado esperado: List(Nodo(Hoja(c,1),Nodo(Hoja(a,3),Hoja(b,2),List(a, b),5),List(c, a, b),6))
+
 val c2 = List(Hoja('a', 3),Hoja('b', 4),Hoja('c', 5),Hoja('d', 6))
-combinar(c2)
+combinar(c2) //Resultado esperado: List(Hoja(c,5), Hoja(d,6), Nodo(Hoja(a,3),Hoja(b,4),List(a, b),7))
 
 hastaQue(listaUnitaria, combinar)(lu1)  //Resultado esperado: List():List[ArbolH]
 hastaQue(listaUnitaria, combinar)(lu2)  //Resultado esperado: List(Hoja(a,3))
@@ -95,4 +111,3 @@ crearArbolDeHuffman(lc2)
 crearArbolDeHuffman(lc3)
 crearArbolDeHuffman(lc4)
 crearArbolDeHuffman(lc5)
-

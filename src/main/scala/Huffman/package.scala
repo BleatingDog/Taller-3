@@ -21,12 +21,7 @@ package object Huffman {
   }
 
   // Parte 2: Construyendo árboles de Huffman
-  def cadenaALista(cad: String): List [Char] = {
-    val cadAux = cad.split("\\s+")    //Ignora los espacios en blanco y devuelve Array de String
-    cadAux.flatMap(_.toSeq).toList           //Convierte cada String en Seq[Char],
-                                             //aplana las secuencias en una Seq[Char] y la convierte en una List[Char]
-
-  }
+  def cadenaALista(cad: String): List [Char] = cad.toList
 
   def ocurrencias(cars: List[Char]): List[(Char, Int)] = cars match {
     case Nil => Nil
